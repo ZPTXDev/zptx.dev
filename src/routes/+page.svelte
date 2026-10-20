@@ -33,34 +33,66 @@
 </script>
 
 <svelte:head>
-	<title>landing</title>
-	<meta name="description" content="ZPTX" />
+	<title>ZPTX</title>
+	<meta name="description" content="Building intuitive, user-friendly software for everyone" />
 </svelte:head>
 
 {#await createAndResolvePromises()}
-	<Loading {elapsed} />
+	<Loading {elapsed} fullscreen={true} />
 {:then}
-	<div class="hero bg-zptx-dark min-h-screen">
-		<div class="hero-content text-center" in:fade>
-			<div class="max-w-md">
-				<img src={logo} alt="ZPTX Logo" />
-				<div class="flex justify-center items-center gap-2 mt-8 text-md md:text-xl font-mono">
-					<a href="{base}/team" class="transition hover:text-white">the team</a>
-					<p class="text-slate-600">/</p>
-					<a href="{base}/projects" class="transition hover:text-white">our projects</a>
-					<p class="text-slate-600">/</p>
-					<a href="{base}/contact" class="transition hover:text-white">contact us</a>
-				</div>
+	<div class="relative min-h-screen bg-zptx-darker overflow-hidden grid-background">
+		<!-- Animated gradient orbs with various movements -->
+		<div class="absolute top-0 -left-20 w-96 h-96 bg-zptx-orange/20 rounded-full blur-3xl animate-float-slow" in:fade={{ duration: 1000 }}></div>
+		<div class="absolute top-1/4 right-1/4 w-80 h-80 bg-purple-500/15 rounded-full blur-3xl animate-float-reverse" style="animation-delay: -2s;" in:fade={{ duration: 1000, delay: 200 }}></div>
+		<div class="absolute bottom-20 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float-diagonal" style="animation-delay: -4s;" in:fade={{ duration: 1000, delay: 400 }}></div>
+		<div class="absolute bottom-1/3 left-1/3 w-72 h-72 bg-zptx-orange/15 rounded-full blur-3xl animate-pulse-slow" in:fade={{ duration: 1000, delay: 600 }}></div>
+
+		<div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
+			<!-- Logo with glow effect -->
+			<div class="relative mb-8" in:fade={{ duration: 800 }}>
+				<div class="absolute inset-0 blur-2xl bg-zptx-orange/30 scale-110 animate-glow"></div>
+				<img src={logo} alt="ZPTX Logo" class="relative w-64 md:w-96 animate-fade-in" />
+			</div>
+
+			<!-- Main content -->
+			<div class="text-center max-w-4xl" in:fly={{ y: 30, duration: 800, delay: 200 }}>
+				<h1 class="text-2xl md:text-3xl font-light mb-6 text-gray-400">
+					building <span class="text-gradient font-semibold">intuitive</span>, <span class="text-gradient font-semibold">user-friendly</span> software
+				</h1>
+
+				<!-- Navigation links with modern styling -->
+				<nav class="flex flex-wrap justify-center items-center gap-3 md:gap-6 mt-12 text-base md:text-lg font-mono">
+					<a href="{base}/team" class="px-4 py-2 glass-panel hover:bg-white/10 transition-all duration-300 no-underline" on:click={() => sessionStorage.setItem('fromLanding', 'true')}>
+						the team
+					</a>
+					<span class="text-zptx-orange">●</span>
+					<a href="{base}/projects" class="px-4 py-2 glass-panel hover:bg-white/10 transition-all duration-300 no-underline" on:click={() => sessionStorage.setItem('fromLanding', 'true')}>
+						our projects
+					</a>
+					<span class="text-zptx-orange">●</span>
+					<a href="{base}/contact" class="px-4 py-2 glass-panel hover:bg-white/10 transition-all duration-300 no-underline" on:click={() => sessionStorage.setItem('fromLanding', 'true')}>
+						contact us
+					</a>
+				</nav>
+			</div>
+
+			<!-- Social links with modern styling -->
+			<div class="absolute bottom-12 flex gap-8 text-3xl" in:fly={{ y: 20, duration: 600, delay: 400 }}>
+				<a
+					href="https://github.com/ZPTXDev"
+					class="glass-panel w-16 h-16 flex items-center justify-center hover:bg-white/10 hover:scale-110 transition-all duration-300 hover:glow-orange no-underline"
+					aria-label="GitHub"
+				>
+					<FontAwesomeIcon icon={faGithub} />
+				</a>
+				<a
+					href="https://go.zptx.dev/discord"
+					class="glass-panel w-16 h-16 flex items-center justify-center hover:bg-white/10 hover:scale-110 transition-all duration-300 hover:glow-orange no-underline"
+					aria-label="Discord"
+				>
+					<FontAwesomeIcon icon={faDiscord} />
+				</a>
 			</div>
 		</div>
-	</div>
-
-	<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-mono flex justify-center gap-6" in:fly={{ y: '20%' }}>
-		<a href="https://github.com/ZPTXDev" class="transition hover:text-white">
-			<FontAwesomeIcon icon={faGithub} />
-		</a>
-		<a href="https://go.zptx.dev/discord" class="transition hover:text-white">
-			<FontAwesomeIcon icon={faDiscord} />
-		</a>
 	</div>
 {/await}

@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-zptx-darker text-gray-100;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 40px rgba(252, 85, 6, 0.3);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-zptx-orange via-zptx-orange-light to-orange-400 bg-clip-text text-transparent;
+  }
+
+  .project-card {
+    @apply glass-panel overflow-hidden transition-all duration-500;
+  }
+
+  .project-card:hover {
+    @apply border-zptx-orange/50 scale-[1.02];
+  }
+
+  .team-card {
+    @apply glass-panel overflow-hidden transition-all duration-500 hover:border-zptx-orange/30;
+  }
+}
+
+@layer utilities {
+  .grid-background {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .no-underline {
+    text-decoration: none !important;
+  }
+}
